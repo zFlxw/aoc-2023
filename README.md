@@ -12,4 +12,6 @@ I am using this as an opportunity to improve my programming skills. I have chose
 
 | Day | Part 1 | Part 2 |
 | --- | :----: | :----: |
-| 1   |   X    |   X    |
+| 1   |   ✅    |   ⚠️*    |
+
+\* Part has been implemented but is not yet working correctly.
