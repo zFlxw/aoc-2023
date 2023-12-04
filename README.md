@@ -15,6 +15,6 @@ I am using this as an opportunity to improve my programming skills. I have chose
 | 1   |   ✅   |   ✅   |
 | 2   |   ✅   |   ✅   |
 | 3   |   ✅   |   ✅   |
-| 4   |   ✅   |   X    |
+| 4   |   ✅   |  ⚠️\*  |
 
 \* Part has been implemented but is not yet working correctly.
