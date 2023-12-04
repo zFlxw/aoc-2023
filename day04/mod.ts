@@ -28,9 +28,9 @@ export function day04_01() {
 }
 
 export function day04_02() {
+  const cards: Record<string, number> = {};
+  
   let totalCards = lines.length;
-  let wins: Record<string, number> = {};
-  let cards: Record<string, number> = {};
 
   lines.forEach((line) => {
     const gameId = +line.split(': ')[0].substring(4).trim();    
