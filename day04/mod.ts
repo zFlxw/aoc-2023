@@ -33,17 +33,19 @@ export function day04_02() {
   let cards: Record<string, number> = {};
 
   lines.forEach((line) => {
-    const gameId = +line.split(': ')[0].split(' ')[1];
+    const gameId = +line.split(': ')[0].substring(4).trim();    
     if (!cards[gameId]) {
       cards[gameId] = 1;
     }
   });
 
+  console.log("Cards: ", cards)
+
   lines.forEach((line) => {
-    const [game, numbers] = line.split(': ');
+    const [_, numbers] = line.split(': ');
     const [winning, own] = numbers.split(' | ');
     const winningNumbers: number[] = [];
-    const gameId = +game.split(' ')[1];
+    const gameId = +line.split(': ')[0].substring(4).trim();  
 
     let matches = 0;
 
@@ -71,6 +73,7 @@ export function day04_02() {
     sum += value;
   }
 
+  console.log('Cards: ', cards)
   console.log('Total Cards: ', sum);
 }
 
