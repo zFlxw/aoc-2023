@@ -9,7 +9,7 @@ export function readFileLines(path: string): string[] {
  * @param size The size of the parts.
  * @returns An array of the chunked string.
  */
-export function cunkString(str: string, size: number): string[] {
+export function chunkString(str: string, size: number): string[] {
   const numChunks = Math.ceil(str.length / size);
   const chunks = new Array(numChunks);
 
