@@ -1,4 +1,4 @@
-import { day04_01, day04_02 } from "./day04/mod.ts";
+import { day05_01, day05_02 } from "./day05/mod.ts";
 
-day04_01();
-day04_02();
+day05_01();
+day05_02();
