@@ -160,27 +160,15 @@ export function day05_02() {
     return checkAndParseNumber(humidityToLocationMap, humidity);
   };
 
+  let seedsLine = '';
+
   for (const line of lines) {
     if (line === '') {
       continue;
     }
 
     if (line.startsWith('seeds')) {
-      const list = line.split(': ')[1].split(' ');
-      let start = 0;
-      for (const entry of list) {
-        if (start === 0) {
-          start = +entry;
-          continue;
-        }
-
-        const range = +entry;
-        for (let i = 0; i < range; i++) {
-          seeds.push(start + i);
-        }
-        start = 0;
-      }
-
+      seedsLine = line;
       continue;
     }
 
@@ -235,11 +223,23 @@ export function day05_02() {
   }
 
   let lowestLocation = 0;
-  for (let i = 0; i < seeds.length; i++) {
-    const seedToLoc = seedToLocation(seeds[i]);
-    if (lowestLocation === 0 || lowestLocation > seedToLoc) {
-      lowestLocation = seedToLoc;
+
+  const list = seedsLine.split(': ')[1].split(' ');
+  let start = 0;
+  for (const entry of list) {
+    if (start === 0) {
+      start = +entry;
+      continue;
     }
+
+    const range = +entry;
+    for (let j = 0; j < range; j++) {
+      const seedToLoc = seedToLocation(start + j);
+      if (lowestLocation === 0 || lowestLocation > seedToLoc) {
+        lowestLocation = seedToLoc;
+      }
+    }
+    start = 0;
   }
 
   console.log('Nearest seed location: ' + lowestLocation);

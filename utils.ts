@@ -19,3 +19,14 @@ export function chunkString(str: string, size: number): string[] {
 
   return chunks;
 }
+
+/**
+ * Replaces multiple whitespaces to one single character.
+ * 
+ * @param str The string where to replace the whitespaces.
+ * @param withChar The replacement character.
+ * @returns The string with the replaced whitespaces.
+ */
+export function replaceWhitespaces(str: string, withChar: string): string {
+  return str.replace(/\s+/g, withChar);
+}
