@@ -18,5 +18,6 @@ I am using this as an opportunity to improve my programming skills. I have chose
 | 4   |   ✅   |   ✅   |
 | 5   |   ✅   |  ⚠️\*  |
 | 6   |   ✅   |   ✅   |
+| 7   |  ⚠️\*  |   X    |
 
 \* Part has been implemented but is not yet working correctly.
