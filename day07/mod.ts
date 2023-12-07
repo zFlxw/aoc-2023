@@ -6,21 +6,20 @@ const letterRanks = {
   Q: 2,
   J: 3,
   T: 4,
-  9: 5,
-  8: 6,
-  7: 7,
-  6: 8,
-  5: 9,
-  4: 10,
-  3: 11,
-  2: 12,
+  '9': 5,
+  '8': 6,
+  '7': 7,
+  '6': 8,
+  '5': 9,
+  '4': 10,
+  '3': 11,
+  '2': 12,
 };
 
 export function day07_01() {
-  const ratings: Record<string, number> = {};
   const bids: Record<string, number> = {};
-
   const ranks: string[][] = [];
+
   readFileLines('day07/input.txt').forEach((line) => {
     const [hand, bid] = line.split(' ');
     const chars: Record<string, number> = {};
@@ -74,67 +73,40 @@ export function day07_01() {
         rating = 7;
     }
 
-    ratings[hand] = rating;
-    console.log('Rating of ' + hand + ': ', rating);
-  });
-  console.log('---');
-
-  for (const hand in ratings) {
-    const rating = ratings[hand];
-    if (!ranks[rating]) {
-      ranks[rating] = [hand];
-      console.log(
-        "Rank not found. Insert new array for rating '" + rating + "'",
-        ranks[rating],
-      );
+    if (ranks[rating]) {
+      ranks[rating].push(hand);
     } else {
-      middle: for (let k = 0; k < ranks[rating].length; k++) {
-        const rank = ranks[rating][k];
-        console.log(
-          "Comparing current hand '" +
-            hand +
-            "' with hands in rating '" +
-            rating +
-            "'. Current rank: ",
-          ranks[rating][k],
-        );
-        for (let i = 0; i < rank.length; i++) {
-          const letter = rank[i];
-          const currentRank =
-            letterRanks[letter.toUpperCase() as keyof typeof letterRanks];
-          const newRank = letterRanks[hand[i] as keyof typeof letterRanks];
-          if (currentRank === newRank) {
-            console.log('The ' + i + '. letter is equal. Skipping to next one');
-            continue;
-          }
-
-          if (currentRank > newRank) {
-            console.log(
-              'The letter at index ' +
-                i +
-                ' of the current rank is lower. Inserting the new deck at the end.',
-            );
-            ranks[rating].push(hand);
-          } else {
-            ranks[rating].splice(k, 0, hand);
-            console.log(
-              'The letter at index ' +
-                i +
-                ' of the new rank is lower. Appending the new deck after the current one',
-            );
-          }
-
-          break middle;
-        }
-      }
+      ranks[rating] = [hand];
     }
+  });
+
+  for (let i = 0; i < ranks.length; i++) {
+    if (!ranks[i]) {
+      continue;
+    }
+    const rank = ranks[i];
+    rank.sort((a, b) => {
+      for (let j = 0; j < a.length; j++) {
+        if (a[j] === b[j]) {
+          continue;
+        }
+
+        return (
+          letterRanks[b[j].toUpperCase() as keyof typeof letterRanks] -
+          letterRanks[a[j].toUpperCase() as keyof typeof letterRanks]
+        );
+      }
+
+      return 0;
+    });
   }
 
-  console.log('final ranking: ', ranks);
-
   let sum = 0;
-  ranks.flat().forEach((value, index) => (sum += bids[value] * (index + 1)));
-  console.log(sum);
+  ranks.flat().forEach((value, index) => {
+    sum += bids[value] * (index + 1);
+  });
+
+  console.log("Total sum: " + sum);
 }
 
 export function day07_02() {}
